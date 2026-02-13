@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben's Vibe Coded Music League No Ads Ripoff – App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="app-page">
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="authOverlay">
+    <div class="modal auth-modal" id="authModal">
+      <div class="auth-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="#9e00c4"/>
+          <path d="M16 13v14l11-7-11-7z" fill="white"/>
+        </svg>
+        <span>Ben's Vibe Coded Music League No Ads Ripoff</span>
+      </div>
+
+      <!-- Login Panel -->
+      <div class="auth-panel" id="loginPanel">
+        <h2>Welcome back</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">LOG IN</button>
+        </form>
+        <p class="auth-switch">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+        <div class="auth-divider"><span>or</span></div>
+        <button class="btn btn-demo btn-block" id="demoBtn">PLAY AS GUEST (DEMO)</button>
+      </div>
+
+      <!-- Signup Panel -->
+      <div class="auth-panel hidden" id="signupPanel">
+        <h2>Create your account</h2>
+        <form id="signupForm">
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="signupName" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">CREATE ACCOUNT</button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Log in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE LEAGUE MODAL -->
+  <div class="modal-overlay hidden" id="createLeagueOverlay">
+    <div class="modal" id="createLeagueModal">
+      <div class="modal-header">
+        <h3>Create a New League</h3>
+        <button class="modal-close" data-close="createLeagueOverlay">&times;</button>
+      </div>
+      <form id="createLeagueForm">
+        <div class="form-group">
+          <label>League Name</label>
+          <input type="text" id="leagueName" placeholder="e.g. Office Music Battle 2025" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Rounds</label>
+            <select id="leagueRounds">
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="8">8</option>
+              <option value="10">10</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Voting Window</label>
+            <select id="votingWindow">
+              <option value="24">24 hours</option>
+              <option value="48" selected>48 hours</option>
+              <option value="72">72 hours</option>
+              <option value="168">1 week</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Votes Per Player</label>
+          <select id="votesPerPlayer">
+            <option value="1">1 vote</option>
+            <option value="2" selected>2 votes</option>
+            <option value="3">3 votes</option>
+            <option value="5">5 votes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description (optional)</label>
+          <textarea id="leagueDesc" rows="2" placeholder="Tell your friends what this league is about..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">CREATE LEAGUE</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JOIN LEAGUE MODAL -->
+  <div class="modal-overlay hidden" id="joinLeagueOverlay">
+    <div class="modal" id="joinLeagueModal">
+      <div class="modal-header">
+        <h3>Join a League</h3>
+        <button class="modal-close" data-close="joinLeagueOverlay">&times;</button>
+      </div>
+      <form id="joinLeagueForm">
+        <div class="form-group">
+          <label>Invite Code</label>
+          <input type="text" id="joinCode" placeholder="Enter your invite code" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">JOIN LEAGUE</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD ROUND MODAL -->
+  <div class="modal-overlay hidden" id="addRoundOverlay">
+    <div class="modal" id="addRoundModal">
+      <div class="modal-header">
+        <h3>Add a Round</h3>
+        <button class="modal-close" data-close="addRoundOverlay">&times;</button>
+      </div>
+      <form id="addRoundForm">
+        <div class="form-group">
+          <label>Round Theme</label>
+          <input type="text" id="roundTheme" placeholder="e.g. Best Breakup Song" required />
+        </div>
+        <div class="form-group">
+          <label>Description (optional)</label>
+          <textarea id="roundDesc" rows="2" placeholder="Any extra rules or hints for this round..."></textarea>
+        </div>
+        <div class="quick-themes">
+          <p>Quick pick:</p>
+          <div class="quick-theme-chips" id="quickThemeChips"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">ADD ROUND</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUBMIT SONG MODAL -->
+  <div class="modal-overlay hidden" id="submitSongOverlay">
+    <div class="modal" id="submitSongModal">
+      <div class="modal-header">
+        <h3>Submit Your Song</h3>
+        <button class="modal-close" data-close="submitSongOverlay">&times;</button>
+      </div>
+      <div class="round-theme-display" id="submitRoundTheme"></div>
+      <form id="submitSongForm">
+        <div class="form-group">
+          <label>Search for a Song</label>
+          <div class="search-wrapper">
+            <input type="text" id="songSearch" placeholder="Artist or song title..." autocomplete="off" />
+            <div class="search-results hidden" id="searchResults"></div>
+          </div>
+        </div>
+        <div class="selected-song hidden" id="selectedSongDisplay">
+          <div class="selected-art" id="selectedArt"></div>
+          <div class="selected-info">
+            <span id="selectedTitle"></span>
+            <small id="selectedArtist"></small>
+          </div>
+          <button type="button" class="btn-icon" id="clearSong" title="Clear">✕</button>
+        </div>
+        <div class="form-group">
+          <label>Your Comment <small>(optional)</small></label>
+          <textarea id="songComment" rows="2" placeholder="Why does this song fit the theme?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="submitSongBtn" disabled>SUBMIT SONG</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- INVITE MODAL -->
+  <div class="modal-overlay hidden" id="inviteOverlay">
+    <div class="modal" id="inviteModal">
+      <div class="modal-header">
+        <h3>Invite Players</h3>
+        <button class="modal-close" data-close="inviteOverlay">&times;</button>
+      </div>
+      <p>Share this invite code with your friends:</p>
+      <div class="invite-code-display" id="inviteCodeDisplay"></div>
+      <button class="btn btn-outline btn-block" id="copyInviteCode">COPY CODE</button>
+      <p class="invite-hint">Anyone with this code can join your league.</p>
+    </div>
+  </div>
+
+  <!-- APP SHELL -->
+  <div class="app-shell hidden" id="appShell">
+
+    <!-- APP HEADER -->
+    <header class="app-header">
+      <div class="app-header-inner">
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="#9e00c4"/>
+            <path d="M16 13v14l11-7-11-7z" fill="white"/>
+          </svg>
+          <span>Ben's Vibe Coded Music League No Ads Ripoff</span>
+        </a>
+        <nav class="app-nav" id="appNav">
+          <a href="#" class="nav-item active" data-view="dashboard">
+            <span class="nav-icon">🏠</span><span>Dashboard</span>
+          </a>
+          <a href="#" class="nav-item" data-view="leagues">
+            <span class="nav-icon">🏆</span><span>My Leagues</span>
+          </a>
+          <a href="#" class="nav-item" data-view="history">
+            <span class="nav-icon">📖</span><span>History</span>
+          </a>
+        </nav>
+        <div class="app-header-right">
+          <div class="user-menu" id="userMenu">
+            <div class="user-avatar" id="userAvatar"></div>
+            <span class="user-name" id="userNameDisplay"></span>
+            <div class="user-dropdown" id="userDropdown">
+              <a href="#" id="profileLink">Profile</a>
+              <a href="#" id="logoutLink">Log Out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="app-main" id="appMain">
+
+      <!-- DASHBOARD VIEW -->
+      <div class="view active" id="view-dashboard">
+        <div class="view-header">
+          <div>
+            <h1 class="view-title" id="dashGreeting">Welcome back!</h1>
+            <p class="view-subtitle">Here's what's happening in your leagues.</p>
+          </div>
+          <div class="view-actions">
+            <button class="btn btn-outline" id="joinLeagueBtn">JOIN LEAGUE</button>
+            <button class="btn btn-primary" id="createLeagueBtn">+ CREATE LEAGUE</button>
+          </div>
+        </div>
+
+        <!-- Action Items -->
+        <section class="dashboard-section" id="actionItemsSection">
+          <h2 class="section-heading">Needs Your Attention</h2>
+          <div class="action-items" id="actionItems">
+            <div class="empty-state-small">No pending actions — you're all caught up! 🎉</div>
+          </div>
+        </section>
+
+        <!-- Active Leagues -->
+        <section class="dashboard-section">
+          <h2 class="section-heading">Active Leagues</h2>
+          <div class="leagues-grid" id="activeLeaguesGrid">
+            <div class="empty-state">
+              <div class="empty-icon">🎵</div>
+              <p>No active leagues yet.</p>
+              <button class="btn btn-primary" id="createLeagueBtn2">Create your first league</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- LEAGUES VIEW -->
+      <div class="view" id="view-leagues">
+        <div class="view-header">
+          <h1 class="view-title">My Leagues</h1>
+          <div class="view-actions">
+            <button class="btn btn-outline" id="joinLeagueBtn2">JOIN LEAGUE</button>
+            <button class="btn btn-primary" id="createLeagueBtn3">+ CREATE LEAGUE</button>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="active-leagues">Active</button>
+          <button class="tab" data-tab="completed-leagues">Completed</button>
+        </div>
+        <div class="tab-content active" id="active-leagues">
+          <div class="leagues-grid" id="allActiveLeagues"></div>
+        </div>
+        <div class="tab-content" id="completed-leagues">
+          <div class="leagues-grid" id="allCompletedLeagues">
+            <div class="empty-state"><div class="empty-icon">🏁</div><p>No completed leagues yet.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY VIEW -->
+      <div class="view" id="view-history">
+        <div class="view-header">
+          <h1 class="view-title">History</h1>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="empty-state"><div class="empty-icon">📖</div><p>Your play history will appear here.</p></div>
+        </div>
+      </div>
+
+      <!-- LEAGUE DETAIL VIEW -->
+      <div class="view" id="view-league-detail">
+        <div class="view-header league-detail-header">
+          <button class="btn-back" id="backToLeagues">← Back</button>
+          <div class="league-detail-title-wrap">
+            <h1 class="view-title" id="detailLeagueName"></h1>
+            <span class="league-status-badge" id="detailLeagueStatus"></span>
+          </div>
+          <div class="view-actions" id="leagueDetailActions"></div>
+        </div>
+
+        <div class="league-detail-body">
+          <!-- Left: Rounds -->
+          <div class="rounds-column">
+            <div class="rounds-header">
+              <h2>Rounds</h2>
+              <button class="btn btn-sm btn-outline" id="addRoundBtn">+ Add Round</button>
+            </div>
+            <div class="rounds-list" id="roundsList"></div>
+          </div>
+
+          <!-- Right: Leaderboard + Info -->
+          <div class="sidebar-column">
+            <div class="card leaderboard-card">
+              <h3>Leaderboard</h3>
+              <div class="leaderboard" id="leaderboard"></div>
+            </div>
+            <div class="card league-info-card">
+              <h3>League Info</h3>
+              <div class="league-meta" id="leagueMeta"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROUND DETAIL VIEW -->
+      <div class="view" id="view-round-detail">
+        <div class="view-header">
+          <button class="btn-back" id="backToLeagueFromRound">← Back to League</button>
+          <div>
+            <h1 class="view-title" id="detailRoundTheme"></h1>
+            <p class="view-subtitle" id="detailRoundStatus"></p>
+          </div>
+          <div class="view-actions" id="roundDetailActions"></div>
+        </div>
+
+        <div class="round-detail-body">
+          <!-- Playlist / Submissions -->
+          <div class="submissions-column">
+            <div id="submissionPhaseUI"></div>
+            <div id="playlistUI"></div>
+          </div>
+
+          <!-- Voting / Results sidebar -->
+          <div class="voting-sidebar" id="votingSidebar"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
